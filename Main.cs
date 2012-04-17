@@ -50,10 +50,13 @@ namespace IpCam2OpenGl
             videoStream = new MJPEGStream (url);
 
             videoStream.NewFrame += (Object sender, NewFrameEventArgs eventArgs) => {
-                lock (videoFrame) {
-                    videoFrame.Dispose ();
+                if (videoFrame != null)
+                    lock (videoFrame) {
+                        videoFrame = new Bitmap (eventArgs.Frame);
+                    }
+                else
                     videoFrame = new Bitmap (eventArgs.Frame);
-                }
+
             };
 
             videoStream.Start ();
@@ -87,13 +90,14 @@ namespace IpCam2OpenGl
 
 
             int videoTexture;
-            lock (videoFrame) {
-                if (videoFrame != null) {
+            if (videoFrame != null)
+                lock (videoFrame) {
                     videoTexture = TexUtil.CreateTextureFromBitmap (videoFrame);
                     GL.BindTexture (TextureTarget.Texture2D, videoTexture);
+                    videoFrame.Dispose ();
+                    videoFrame = null;
                 }
-
-            }
+            GC.Collect ();
             fullscreenQuad.Draw ();
 
             SwapBuffers ();
