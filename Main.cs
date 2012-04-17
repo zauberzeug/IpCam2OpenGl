@@ -11,7 +11,7 @@ namespace IpCam2OpenGl
 {
     class Window : GameWindow
     {
-        Bitmap videoFrame = new Bitmap(10,10);
+        Bitmap videoFrame = new Bitmap (10, 10);
         MJPEGStream videoStream;
         Quad fullscreenQuad = new Quad ();
         
@@ -52,7 +52,6 @@ namespace IpCam2OpenGl
             videoStream.NewFrame += (Object sender, NewFrameEventArgs eventArgs) => {
                 lock (videoFrame) {
                     videoFrame.Dispose ();
-
                     videoFrame = new Bitmap (eventArgs.Frame);
                 }
             };
