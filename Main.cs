@@ -16,7 +16,7 @@ namespace IpCam2OpenGl
         Quad fullscreenQuad = new Quad ();
         
         public Window ()
-            : base(800, 800, GraphicsMode.Default, "Zauberzeug IpCam2OpenGL Demo")
+            : base(640, 480, GraphicsMode.Default, "Zauberzeug IpCam2OpenGL Demo")
         {
             VSync = VSyncMode.On;
         }
@@ -33,7 +33,6 @@ namespace IpCam2OpenGl
 
             GL.ColorMaterial (MaterialFace.FrontAndBack, ColorMaterialParameter.AmbientAndDiffuse);
             GL.Enable (EnableCap.ColorMaterial);
-            GL.Enable (EnableCap.PolygonSmooth);
 
             GL.Enable (EnableCap.Blend);
             GL.BlendFunc (BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
@@ -52,7 +51,9 @@ namespace IpCam2OpenGl
 
             videoStream.NewFrame += (Object sender, NewFrameEventArgs eventArgs) => {
                 lock (videoFrame) {
-                    videoFrame = new Bitmap(eventArgs.Frame);
+                    videoFrame.Dispose ();
+
+                    videoFrame = new Bitmap (eventArgs.Frame);
                 }
             };
 
