@@ -75,8 +75,6 @@ namespace TexLib
         /// </summary>
         public static int CreateTextureFromBitmap (Bitmap bitmap)
         {
-            bitmap = new Bitmap (bitmap);
-            bitmap.RotateFlip (RotateFlipType.RotateNoneFlipY);
             Img.BitmapData data = bitmap.LockBits (
         new Rectangle (0, 0, bitmap.Width, bitmap.Height),
         Img.ImageLockMode.ReadOnly,
