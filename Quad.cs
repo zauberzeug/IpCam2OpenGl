@@ -68,16 +68,16 @@ namespace IpCam2OpenGl
             } else
                 GL.Color4 (Color);
 
-            GL.TexCoord2 (1.0f, 1.0f);
+            GL.TexCoord2 (0.0f, 1.0f);
             GL.Vertex3 (-1.0f, -1.0f, 0f);
 
-            GL.TexCoord2 (0.0f, 1.0f);
+            GL.TexCoord2 (1.0f, 1.0f);
             GL.Vertex3 (1.0f, -1.0f, 0f);
 
-            GL.TexCoord2 (0.0f, 0.0f);
+            GL.TexCoord2 (1.0f, 0.0f);
             GL.Vertex3 (1.0f, 1.0f, 0.0f);
 
-            GL.TexCoord2 (1.0f, 0.0f);
+            GL.TexCoord2 (0.0f, 0.0f);
             GL.Vertex3 (-1.0f, 1.0f, 0f);
 
             GL.End ();
