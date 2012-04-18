@@ -11,7 +11,7 @@ namespace IpCam2OpenGl
 {
     class Window : GameWindow
     {
-        Bitmap videoFrame = new Bitmap (10, 10);
+        Bitmap videoFrame = null;
         MJPEGStream videoStream;
         Quad fullscreenQuad = new Quad ();
         
@@ -44,7 +44,7 @@ namespace IpCam2OpenGl
 
         private void OpenVideoStream ()
         {
-            string url = "http://192.168.0.142:8080/videofeed";
+            string url = "http://localhost:8080/";
 
             Console.WriteLine ("Connecting to {0}", url);
             videoStream = new MJPEGStream (url);
