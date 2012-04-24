@@ -13,8 +13,9 @@ namespace IpCam2OpenGl
     {
         Bitmap videoFrame = null;
         MJPEGStream videoStream;
+        int videoTexture = -1;
         Quad fullscreenQuad = new Quad ();
-        
+
         public Window ()
             : base(640, 480, GraphicsMode.Default, "Zauberzeug IpCam2OpenGL Demo")
         {
@@ -89,9 +90,10 @@ namespace IpCam2OpenGl
             GL.Ortho (-1, 1, -1, 1, -1, 1.1);
 
 
-            int videoTexture;
             if (videoFrame != null)
                 lock (videoFrame) {
+                    if (videoTexture != -1)
+                        GL.DeleteTextures (1, ref videoTexture);
                     videoTexture = TexUtil.CreateTextureFromBitmap (videoFrame);
                     GL.BindTexture (TextureTarget.Texture2D, videoTexture);
                     videoFrame.Dispose ();
